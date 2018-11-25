@@ -1,0 +1,41 @@
+<div class="container">
+  <h1>Updating queryParams w/o triggering a change</h1>
+
+  <h3>This is a reproduction with some (hopefully useful) extra information of Angular Issue <a href="https://github.com/angular/angular/issues/17609">#17609</a></h3>
+
+  <div>
+    <p>This is not triggering a change...Router.navigate is responding with
+      NULL...this should <a href="https://angular.io/api/router/Router#navigate">never happen</a>...</p>
+    <button (click)="updateQueryParamsNotDetectingChange()">
+      Bug
+    </button>
+  </div>
+  <div>
+    <p>...this is triggering a change, because we are adding an extra queryParam holding a random string-value (would
+      not work if random value is inside an array)...</p>
+    <button (click)="updateQueryParamsNotDetectingChangeWorkaround()">
+      Workaround with random string-value
+    </button>
+  </div>
+  <div>
+    <p>...for completeness we are adding here a radom string to the array, of course also not triggerin a
+      change...Router.navigate is also responding with
+      NULL...</p>
+    <button (click)="updateQueryParamsNotDetectingChangeWorkaroundArray()">
+      Random in Array
+    </button>
+  </div>
+  <div>
+    <p>...this is working because we are setting a new (static) Array as the value for queryParams.two...</p>
+    <button (click)="updateQueryParamsNotDetectingChangeFunFactOne()">
+      Fun Fact One
+    </button>
+  </div>
+  <div>
+    <p>...and here we are creating a copy of queryParams.two programatically...for some reason this is working here,
+      but wasn't yesterday in another project.</p>
+    <button (click)="updateQueryParamsNotDetectingChangeFunFactTwo()">
+      Fun Fact Two
+    </button>
+  </div>
+</div>
